@@ -1,0 +1,19 @@
+.contacto-img {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 1px solid #ccc;
+}
+
+.contacto-item {
+  transition: transform 0.2s ease;
+}
+
+.contacto-item:hover {
+  transform: scale(1.01);
+}
+
+#buscarInput {
+  max-width: 300px;
+}

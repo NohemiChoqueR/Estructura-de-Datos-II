@@ -1,0 +1,109 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #e0ffff;
+    margin: 0;
+    padding: 0;
+}
+
+.profile-container {
+    max-width: 400px;
+    margin: 80px auto;
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.profile-picture {
+    border-radius: 50%;
+    max-width: 120px;
+    border: 2px solid #ccc;
+    transition: transform 0.3s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+}
+
+.profile-info h2 {
+    margin: 20px 0 10px;
+    color: #222;
+    font-size: 1.8rem;
+}
+
+.profile-info p {
+    margin: 10px 0;
+    font-size: 1.1rem;
+    color: #555;
+}
+
+.profile-info i {
+    margin-right: 8px;
+    color: #007bff;
+}
+
+
+
+
+.redes-sociales {
+    margin-top: 25px;
+}
+
+.redes-sociales a {
+    color: #555;
+    font-size: 24px;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.redes-sociales a:hover {
+    color: #007bff;
+}
+
+.acciones-contacto {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.acciones-contacto .btn {
+    width: 140px;
+    height: 45px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn {
+    padding: 0; /* Eliminamos el padding para controlar altura */
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-outline-primary {
+    color: #007bff;
+    background-color: transparent;
+    border: 1px solid #007bff;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+}
+
+
+

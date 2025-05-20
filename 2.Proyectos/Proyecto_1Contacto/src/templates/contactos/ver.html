@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Ver Contacto - {{ contacto.nombre }}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+
+  <body>
+    <div class="profile-container">
+      <img
+        src="{{ contacto.imagen_url or 'https://i.imgur.com/IqfJ5pY.png' }}"
+        alt="Foto de {{ contacto.nombre }}"
+        class="profile-picture"
+      />
+
+      <div class="profile-info">
+        <h2>{{ contacto.nombre }}</h2>
+        <p><i class="fas fa-phone"></i> {{ contacto.telefono }}</p>
+        <p><i class="fas fa-envelope"></i> {{ contacto.correo }}</p>
+
+        <div class="acciones-contacto">
+          <button class="btn btn-outline-primary">
+            <i class="fas fa-comment"></i> Mensaje
+          </button>
+          <button class="btn btn-outline-primary">
+            <i class="fas fa-phone"></i> Llamar
+          </button>
+          <a
+            href="{{ url_for('contactos.listar_contactos') }}"
+            class="btn btn-outline-primary"
+          >
+            ← Volver
+          </a>
+          <a
+            href="{{ url_for('contactos.editar_contacto', nombre=contacto.nombre) }}"
+            class="btn btn-primary"
+          >
+            <i class="fa-solid fa-pen-to-square"></i>
+ Editar
+          </a>
+        </div>
+
+        <div class="redes-sociales">
+          <a href="#"><i class="fab fa-facebook-square"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
