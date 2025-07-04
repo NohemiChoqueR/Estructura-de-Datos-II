@@ -1,0 +1,10 @@
+{% if history %}
+<div class="mt-4" style="max-width:480px; margin:auto; text-align:left;">
+  <h5>Historial:</h5>
+  <ul class="list-group">
+    {% for h in history %}
+      <li class="list-group-item"><a href="{{ url_for('predictivo.buscar') }}?q={{ h }}">{{ h }}</a></li>
+    {% endfor %}
+  </ul>
+</div>
+{% endif %}

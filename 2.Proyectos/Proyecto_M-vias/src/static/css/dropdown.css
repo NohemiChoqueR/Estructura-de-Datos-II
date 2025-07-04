@@ -1,0 +1,125 @@
+/* dropdown.css - SOLUCIÓN FINAL SIN FRANJAS */
+#results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  width: 100%;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 0 0 15px 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 300px;
+  overflow-y: auto;
+  z-index: 1000;
+  border: none;
+  
+  /* SOLUCIÓN PRINCIPAL: Ocultar scrollbars completamente */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  overflow-x: hidden; /* Evita scrollbar horizontal */
+}
+
+/* Ocultar scrollbar en navegadores Webkit (Chrome, Safari, Edge) */
+#results::-webkit-scrollbar {
+  display: none;
+}
+
+#results[hidden] {
+  display: none;
+}
+
+#results li {
+  padding: 0.8rem 1.5rem;
+  cursor: pointer;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+  color: #333;
+  font-size: 1rem;
+  background: transparent;
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0; /* Asegurar sin márgenes */
+}
+
+#results li:last-child {
+  border-bottom: none;
+  border-radius: 0 0 15px 15px;
+}
+
+#results li:hover {
+  background: rgba(72, 202, 228, 0.1);
+  color: #0077b6;
+}
+
+#results li:first-child {
+  border-radius: 0;
+  margin-top: 0; /* Eliminar cualquier margen superior */
+}
+
+/* Asegurar que no hay espacios ni márgenes */
+#results * {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ALTERNATIVA: Si prefieres un scrollbar personalizado muy sutil */
+/*
+#results {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.1) transparent;
+}
+
+#results::-webkit-scrollbar {
+  width: 3px;
+  background: transparent;
+}
+
+#results::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+#results::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+}
+
+#results::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+*/
+
+/* EXTRA: Asegurar que el contenedor padre no tenga conflictos */
+.search-row {
+  position: relative;
+  display: flex;
+  gap: 1rem;
+  /* Asegurar que no hay overflow que cause líneas */
+  overflow: visible;
+}
+
+.simple-search-box {
+  flex: 1;
+  padding: 1rem 1.5rem;
+  border: none;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.9);
+  font-size: 1.1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  /* Asegurar que no hay bordes que causen líneas */
+  outline: none;
+  box-sizing: border-box;
+}
+
+.simple-search-box:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(72, 202, 228, 0.5);
+  transform: translateY(-2px);
+  /* Eliminar cualquier borde que pueda aparecer */
+  border: none;
+}

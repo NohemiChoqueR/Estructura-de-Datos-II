@@ -1,0 +1,7 @@
+<form id="search-form" class="glass-form" action="{{ url_for('predictivo.buscar') }}" method="get" autocomplete="off">
+  <div class="search-row">
+    <input id="search" name="q" type="text" class="simple-search-box" placeholder="Escribe una palabra..." value="{{ palabra or '' }}">
+    <button type="submit" class="glass-btn">Buscar</button>
+  </div>
+  <ul id="results" hidden></ul>
+</form>

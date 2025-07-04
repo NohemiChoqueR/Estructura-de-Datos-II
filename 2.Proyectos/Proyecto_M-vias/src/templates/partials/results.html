@@ -1,0 +1,9 @@
+{% if resultado %}
+<div class="result-container">
+  <h2>{{ resultado.titulo }}</h2>
+  {% if resultado.imagen %}<img src="{{ resultado.imagen }}" alt="{{ resultado.titulo }}">{% endif %}
+  {% if resultado.descripcion %}<p><em>{{ resultado.descripcion }}</em></p>{% endif %}
+  <div class="wiki-content">{{ contenido_html|safe }}</div>
+  <a href="{{ resultado.url }}" target="_blank" class="btn btn-info mt-2">Ver en Wikipedia →</a>
+</div>
+{% endif %}

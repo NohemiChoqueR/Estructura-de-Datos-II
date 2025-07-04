@@ -1,0 +1,217 @@
+{# templates/predictivo1.html #}
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Autocompletado Predictivo</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/dropdown.css') }}"
+      rel="stylesheet"
+    />
+    <link
+      href="{{ url_for('static', filename='css/base.css') }}"
+      rel="stylesheet"
+    />
+ 
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if
+    messages %}
+    <div class="container mt-3">
+      {% for categoria, msg in messages %}
+      <div
+        class="alert alert-{{ 'danger' if categoria=='error' else 'success' }}"
+        role="alert"
+      >
+        {{ msg }}
+      </div>
+      {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <!-- Modern Header -->
+    <header class="modern-header">
+      <div class="header-content">
+        <a href="{{ url_for('predictivo.index') }}" class="header-brand">
+          <div class="brand-icon">
+            <i class="bi bi-tree"></i>
+          </div>
+          <span>Árbol Predictivo</span>
+        </a>
+
+        <nav class="header-nav">
+          <a href="{{ url_for('predictivo.index') }}" class="nav-item">
+            <i class="bi bi-house"></i>
+            Inicio
+          </a>
+          <a href="#" class="nav-item">
+            <i class="bi bi-diagram-3"></i>
+            Estructura
+          </a>
+         
+           <a href="{{ url_for('predictivo.ver_palabras_arbol') }}" class="nav-item">
+            <i class="bi bi-diagram-3"></i>
+            Ver Palabras
+          </a>
+
+          <button
+            class="btn-add-word"
+            data-bs-toggle="modal"
+            data-bs-target="#addWordModal"
+          >
+            <i class="bi bi-plus-circle"></i>
+            Agregar Palabra
+          </button>
+
+         
+        </nav>
+      </div>
+    </header>
+
+    <div class="glass-container {% if resultado %}expanded{% endif %}">
+      <div class="glass-title">
+        🔍 Buscador Predictivo con Árbol M-vías y Wikipedia
+      </div>
+      <div class="glass-subtitle">
+        Encuentra información al instante gracias al árbol M-vías y
+        autocompletado.
+      </div>
+
+      <form
+        id="search-form"
+        class="glass-form"
+        action="{{ url_for('predictivo.buscar') }}"
+        method="get"
+        autocomplete="off"
+      >
+<div class="search-row" style="position: relative;">
+  <input
+    id="search"
+    name="q"
+    type="text"
+    class="simple-search-box"
+    placeholder="Escribe una palabra..."
+    autocomplete="off"
+    autocorrect="off"
+    autocapitalize="none"
+    value="{{ palabra }}"
+    data-url="{{ url_for('predictivo.sugerencias') }}"
+  />
+  <ul id="results" hidden></ul>
+  <button type="submit" class="glass-btn">Buscar</button>
+</div>
+
+      
+      </form>
+        <ul id="results" hidden></ul>
+
+      {% if mensaje and not resultado %}
+      <div class="alert alert-warning">{{ mensaje }}</div>
+      {% endif %} {% if resultado %}
+      <div class="result-container">
+        <h2>{{ resultado.titulo }}</h2>
+        {% if resultado.imagen %}
+        <img
+          src="{{ resultado.imagen }}"
+          alt="Imagen de {{ resultado.titulo }}"
+        />
+        {% endif %}
+        <p><em>{{ resultado.descripcion }}</em></p>
+        <div class="wiki-content">{{ contenido_html | safe }}</div>
+        <p>
+          <a href="{{ resultado.url }}" target="_blank"
+            >Ver más en Wikipedia →</a
+          >
+        </p>
+      </div>
+      {% endif %}
+
+      <div class="glass-suggestions">
+        Sugerencias estáticas: <b>informática</b>, <b>Árbol binario</b>,
+        <b>Marie Curie</b>…
+      </div>
+    </div>
+
+    <!-- Modal para Agregar Palabra -->
+    <div
+      class="modal fade"
+      id="addWordModal"
+      tabindex="-1"
+      aria-labelledby="addWordModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <form
+            action="{{ url_for('predictivo.agregar_palabra') }}"
+            method="post"
+          >
+            <div class="modal-header">
+              <h5 class="modal-title" id="addWordModalLabel">
+                Agregar Palabra
+              </h5>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Cerrar"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <div class="mb-3">
+                <label for="palabraInput" class="form-label">Palabra</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="palabraInput"
+                  name="palabra"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="frecuenciaInput" class="form-label"
+                  >Frecuencia</label
+                >
+                <input
+                  type="number"
+                  class="form-control"
+                  id="frecuenciaInput"
+                  name="frecuencia"
+                  value="1"
+                  min="1"
+                  required
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Cancelar
+              </button>
+              <button type="submit" class="btn btn-primary">Agregar</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      const urlSugerencias = "{{ url_for('predictivo.sugerencias') }}";
+    </script>
+    <script src="{{ url_for('static', filename='js/ajustar.js') }}"></script>
+  </body>
+</html>
