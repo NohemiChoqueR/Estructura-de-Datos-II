@@ -39,16 +39,13 @@ def agregar_palabra():
             frecuencia = 1
     except ValueError:
         frecuencia = 1
-    
-    # Verificar si la palabra ya existe
+
     if tree.contiene(palabra.lower()):
-        # Si existe, actualizamos su frecuencia
         freq_actual = tree.obtener_frecuencia(palabra.lower())
         nueva_freq = freq_actual + frecuencia
         tree.insertar(palabra.lower(), nueva_freq)
         flash(f"Palabra '{palabra}' actualizada. Nueva frecuencia: {nueva_freq}", "success")
     else:
-        # Si no existe, la insertamos
         tree.insertar(palabra.lower(), frecuencia)
         flash(f"Palabra '{palabra}' agregada exitosamente con frecuencia: {frecuencia}", "success")
     

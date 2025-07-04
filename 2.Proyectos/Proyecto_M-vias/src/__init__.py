@@ -14,18 +14,11 @@ def create_app():
         static_folder="static"         # apunta a src/static
     )
 
-    # Opcional: si quieres usar una SECRET_KEY para sesiones, CSRF, etc.
     app.secret_key = os.getenv("SECRET_KEY", "dev-key")
 
-    # ------------------------------------------------------------------
-    # 1) Registra sólo tu blueprint de Autocompletado Predictivo
-    # ------------------------------------------------------------------
     from src.controllers.predictivo_controller import bp as predictivo_bp
     app.register_blueprint(predictivo_bp)     # monta en /predictivo
 
-    # ------------------------------------------------------------------
-    # 2) Redirección de la raíz al autocompletado
-    # ------------------------------------------------------------------
     @app.route("/")
     def home():
         return redirect("/predictivo/")
